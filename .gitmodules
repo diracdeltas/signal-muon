@@ -1,0 +1,3 @@
+[submodule "Signal-Desktop"]
+	path = Signal-Desktop
+	url = https://github.com/diracdeltas/Signal-Desktop.git
