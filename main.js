@@ -4,15 +4,20 @@ const path = require('path')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+const ipc = electron.ipcMain
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+// map ID to window object
+const windows = {}
 
-// Copied from Brave browser-laptop
 const signalExtensionId = 'iopnjipkpnmbpjaalcjcpcbfcnjknmmo'
-
 const signalExtensionPath = path.join(__dirname, 'Signal-Desktop')
+
+const messages = {
+  CALLBACK: 'callback',
+  CREATE_WINDOW: 'create-window',
+  GET_CURRENT_WINDOW: 'get-current-window',
+  REMOVE_WINDOW: 'remove-window'
+}
 
 const fileUrl = (str) => {
   var pathName = path.resolve(str).replace(/\\/g, '/')
@@ -25,19 +30,21 @@ const fileUrl = (str) => {
   return encodeURI('file://' + pathName)
 }
 
-function createWindow () {
+function createWindow (options) {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  let mainWindow = new BrowserWindow({
     title: 'Signal Private Messenger',
     width: 800,
     height: 600
   })
 
+  windows[options.id] = mainWindow
+  mainWindow.id = options.id
+
   // and load the index.html of the app.
-  mainWindow.loadURL(fileUrl(path.join(__dirname, 'index.html')))
-  const wc = mainWindow.webContents
+  mainWindow.loadURL(fileUrl(path.join(__dirname, `index.html#${options.url}`)))
   // Open the DevTools.
-  wc.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -45,7 +52,10 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+    delete windows[options.id]
   })
+
+  return mainWindow
 }
 
 // This method will be called when Electron has finished
@@ -53,7 +63,28 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   init()
-  createWindow()
+  // Attach IPC listeners
+  ipc.on(messages.CREATE_WINDOW, (e, id, options) => {
+    console.log('got create window')
+    createWindow(options)
+    e.sender.send(messages.CALLBACK, id, {
+      id: options.id,
+      focused: true
+    })
+  })
+  ipc.on(messages.GET_CURRENT_WINDOW, (e, id) => {
+    const windowInfo = {
+      id: BrowserWindow.getFocusedWindow().id,
+      focused: true
+    }
+    e.sender.send(messages.CALLBACK, id, windowInfo)
+  })
+  ipc.on(messages.REMOVE_WINDOW, (e, id, windowId) => {
+    if (windows[windowId]) {
+      windows[windowId].close()
+    }
+    e.sender.send(messages.CALLBACK, id)
+  })
 })
 
 // Quit when all windows are closed.
@@ -62,14 +93,6 @@ app.on('window-all-closed', function () {
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
-  }
-})
-
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
   }
 })
 
@@ -95,6 +118,9 @@ const signalManifest = {
     '256': 'images/icon_256.png'
   },
   incognito: 'spanning',
+  background: {
+    page: 'background.html'
+  },
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxvZ70fWZ/yqYMuoRMRIRLR0zwiEGJrDuQwI03TiqUllg6/EBj+YOyldoPQeEOua//0i6NzSX6OwoZv2ynfGJSQwq550OphRXU8YGeWqPGhU7JeoH/6ZqHJefBXIHIAqipuBuVCsm9ONfrj1L1CmWt/VOIUqlk6i4g3Xe2WnPRk5z7su9VR0UYIahX8av4qJtAwGoUkvbdTZAD6vHIu18wgA0jO5g41KGXb/uco3o8HpJ9YPQsH04TXadXwOA9sn6LNBl0t12GlRVViQJZe3x3hS/uYQFdPfqN+abrqnSOwA2mDZbxkLBwPt6ayql5cM1OjGt+Wj3bMBtTHQ+oavBBwIDAQAB'
 }
 
