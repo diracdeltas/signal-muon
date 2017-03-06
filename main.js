@@ -16,6 +16,7 @@ const messages = {
   CALLBACK: 'callback',
   CREATE_WINDOW: 'create-window',
   GET_CURRENT_WINDOW: 'get-current-window',
+  FOCUS_WINDOW: 'focus-window',
   REMOVE_WINDOW: 'remove-window'
 }
 
@@ -83,6 +84,12 @@ app.on('ready', () => {
   ipc.on(messages.REMOVE_WINDOW, (e, id, windowId) => {
     if (windows[windowId]) {
       windows[windowId].close()
+    }
+    e.sender.send(messages.CALLBACK, id)
+  })
+  ipc.on(messages.FOCUS_WINDOW, (e, id, windowId) => {
+    if (windows[windowId]) {
+      windows[windowId].focus()
     }
     e.sender.send(messages.CALLBACK, id)
   })
