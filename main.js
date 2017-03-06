@@ -34,6 +34,7 @@ function createWindow (options) {
   // Create the browser window.
   let mainWindow = new BrowserWindow({
     title: 'Signal Private Messenger',
+    icon: path.join(__dirname, 'Signal-Desktop', 'images', 'icon_128.png'),
     width: 800,
     height: 600
   })
