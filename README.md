@@ -23,5 +23,4 @@ server, so you will probably be very lonely unless you want to talk to other
 Signal contributors.
 
 That means you can talk to me! My test number is (oldest
-telephone area code in San Francisco) + (decimal char code of capital Epsilon)
-+ (the 513th prime)
+telephone area code in San Francisco) + (decimal char code of capital Epsilon) + (the 513th prime).
