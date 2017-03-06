@@ -67,7 +67,6 @@ app.on('ready', () => {
   init()
   // Attach IPC listeners
   ipc.on(messages.CREATE_WINDOW, (e, id, options) => {
-    console.log('got create window')
     createWindow(options)
     e.sender.send(messages.CALLBACK, id, {
       id: options.id,
@@ -137,20 +136,11 @@ const signalManifest = {
 const init = (extensionId, manifest) => {
   const {session} = require('electron')
   process.on('extension-load-error', (error) => {
-    console.error(error)
+    console.log('extension load error', error)
   })
   process.on('extension-ready', (installInfo) => {
     console.log('extension ready', installInfo.name)
   })
-
-  /*
-  let enableExtension = (extensionId) => {
-    session.defaultSession.extensions.enable(extensionId)
-  }
-  let disableExtension = (extensionId) => {
-    session.defaultSession.extensions.disable(extensionId)
-  }
-  */
 
   let loadExtension = (extensionId, extensionPath, manifest, manifestLocation = 'unpacked') => {
     session.defaultSession.extensions.load(extensionPath, manifest, manifestLocation)
