@@ -5,6 +5,6 @@ webview.setAttribute('src',
 webview.setAttribute('partition', 'persist:default')
 webview.setAttribute('style', 'height:100%;')
 webview.addEventListener('dom-ready', () => {
-  webview.openDevTools()
+  // webview.openDevTools()
 })
 document.body.appendChild(webview)
