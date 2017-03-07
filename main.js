@@ -17,7 +17,8 @@ const messages = {
   CREATE_WINDOW: 'create-window',
   GET_CURRENT_WINDOW: 'get-current-window',
   FOCUS_WINDOW: 'focus-window',
-  REMOVE_WINDOW: 'remove-window'
+  REMOVE_WINDOW: 'remove-window',
+  RESTART: 'restart'
 }
 
 const fileUrl = (str) => {
@@ -91,6 +92,12 @@ app.on('ready', () => {
       windows[windowId].focus()
     }
     e.sender.send(messages.CALLBACK, id)
+  })
+  ipc.on(messages.RESTART, () => {
+    const args = process.argv.slice(1)
+    args.push('--relaunch')
+    app.relaunch({args})
+    app.quit()
   })
 })
 
