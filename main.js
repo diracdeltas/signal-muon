@@ -38,7 +38,7 @@ function createWindow (options) {
     title: 'Signal Private Messenger',
     icon: path.join(__dirname, 'Signal-Desktop', 'images', 'icon_128.png'),
     width: 800,
-    height: 600
+    height: 700
   })
 
   windows[options.id] = mainWindow
