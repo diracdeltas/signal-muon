@@ -1,10 +1,12 @@
 {
-  "name": "signal-muon-dev",
+  "name": "signal-muon",
+  "productName": "Signal Desktop",
   "repository": "https://github.com/diracdeltas/Signal-Muon",
   "description": "Signal Desktop built on top of https://github.com/brave/muon",
   "license": "MPL-2.0",
   "version": "0.0.1",
   "devDependencies": {
+    "electron-packager": "brave/electron-packager",
     "electron-prebuilt": "brave/electron-prebuilt",
     "standard": "^9.0.0"
   },
@@ -16,6 +18,7 @@
   },
   "scripts": {
     "start": "node ./tools/start.js --debug=5859 --enable-logging --v=0 --enable-extension-activity-logging --enable-sandbox-logging --enable-dcheck",
+    "build": "node ./tools/buildPackage.js",
     "lint": "standard"
   }
 }
