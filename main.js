@@ -5,6 +5,7 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain
+const shell = electron.shell
 
 // map ID to window object
 const windows = {}
@@ -20,7 +21,8 @@ const messages = {
   GET_CURRENT_WINDOW: 'get-current-window',
   FOCUS_WINDOW: 'focus-window',
   REMOVE_WINDOW: 'remove-window',
-  RESTART: 'restart'
+  RESTART: 'restart',
+  OPEN_LINK: 'open-link',
 }
 
 const fileUrl = (str) => {
@@ -100,6 +102,9 @@ app.on('ready', () => {
     args.push('--relaunch')
     app.relaunch({args})
     app.quit()
+  })
+  ipc.on(messages.OPEN_LINK, (e, url) => {
+      shell.openExternal(url)
   })
 })
 
