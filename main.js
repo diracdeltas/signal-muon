@@ -24,7 +24,7 @@ const messages = {
 }
 
 const fileUrl = (str) => {
-  var pathName = path.resolve(str).replace(/\\/g, '/')
+  let pathName = path.resolve(str).replace(/\\/g, '/')
 
   // Windows drive letter must be prefixed with a slash
   if (pathName[0] !== '/') {
