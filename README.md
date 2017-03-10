@@ -1,13 +1,15 @@
 # Signal Muon
 
 [Signal Desktop](https://github.com/WhisperSystems/Signal-Desktop) built on top
-of [Muon](https://github.com/Brave/muon).
+of [Muon](https://github.com/Brave/muon) so you can run it without Google
+Chrome.
 
-*THIS IS NOT PRODUCTION READY. DO NOT USE IT.*
+*THIS IS NOT PRODUCTION READY. Use at your own risk.* I am in no way affiliated
+with WhisperSystems.
 
-## Running
+## Running in development mode
 
-You must have node and npm installed.
+You must have node 7.x and npm installed.
 
 ```
 git clone --recursive https://github.com/diracdeltas/signal-muon.git
@@ -16,14 +18,18 @@ npm install
 npm start
 ```
 
+## Building
+
+```
+npm run build
+```
+
 ## Caveats
 
-By default, you can only message accounts that are registered on the Signal **staging**
+In development mode, you can only message accounts that are registered on the Signal **staging**
 server, so you will probably be very lonely unless you want to talk to other
-Signal contributors.
-
-That means you can talk to me! My test number is (oldest
+Signal contributors. If you want someone to talk to, my test number is (oldest
 telephone area code in San Francisco) + (decimal char code of capital Epsilon) + (the 513th prime).
 
 If you want to link Signal-Muon to your mobile device so that you can talk
-to your contacts, check out the `feature/production` branch.
+to your contacts, you need to do a build.

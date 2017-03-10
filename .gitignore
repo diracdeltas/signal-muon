@@ -1,2 +1,13 @@
 node_modules
 npm-debug.log
+
+# electron-packager output dirs
+*-darwin-x64
+*-win32-x64
+*-win32-ia32
+*-linux-x64
+dist
+dist-x64
+dist-ia32
+win64-dist
+Signal.tar.bz2

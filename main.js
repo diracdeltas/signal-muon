@@ -10,10 +10,16 @@ const shell = electron.shell
 // map ID to window object
 const windows = {}
 
+const isProduction = process.env.NODE_ENV !== 'development'
 const signalExtensionId = 'iopnjipkpnmbpjaalcjcpcbfcnjknmmo'
 const signalExtensionPath = process.env.NODE_ENV === 'production'
   ? path.join(__dirname, '..', '..', 'Signal-Desktop')
   : path.join(__dirname, 'Signal-Desktop')
+
+// use a separate data directory for development
+if (!isProduction) {
+  app.setPath('userData', path.join(app.getPath('appData'), 'signal-muon'))
+}
 
 const messages = {
   CALLBACK: 'callback',
@@ -140,7 +146,7 @@ const signalManifest = {
   },
   incognito: 'spanning',
   background: {
-    page: 'background.html'
+    page: isProduction ? 'background.html' : 'background.html#dev'
   },
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxvZ70fWZ/yqYMuoRMRIRLR0zwiEGJrDuQwI03TiqUllg6/EBj+YOyldoPQeEOua//0i6NzSX6OwoZv2ynfGJSQwq550OphRXU8YGeWqPGhU7JeoH/6ZqHJefBXIHIAqipuBuVCsm9ONfrj1L1CmWt/VOIUqlk6i4g3Xe2WnPRk5z7su9VR0UYIahX8av4qJtAwGoUkvbdTZAD6vHIu18wgA0jO5g41KGXb/uco3o8HpJ9YPQsH04TXadXwOA9sn6LNBl0t12GlRVViQJZe3x3hS/uYQFdPfqN+abrqnSOwA2mDZbxkLBwPt6ayql5cM1OjGt+Wj3bMBtTHQ+oavBBwIDAQAB'
 }
