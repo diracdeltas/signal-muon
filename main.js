@@ -10,7 +10,9 @@ const ipc = electron.ipcMain
 const windows = {}
 
 const signalExtensionId = 'iopnjipkpnmbpjaalcjcpcbfcnjknmmo'
-const signalExtensionPath = path.join(__dirname, 'Signal-Desktop')
+const signalExtensionPath = process.env.NODE_ENV === 'production'
+  ? path.join(__dirname, '..', '..', 'Signal-Desktop')
+  : path.join(__dirname, 'Signal-Desktop')
 
 const messages = {
   CALLBACK: 'callback',
@@ -38,7 +40,7 @@ function createWindow (options) {
     title: 'Signal Private Messenger',
     icon: path.join(__dirname, 'Signal-Desktop', 'images', 'icon_128.png'),
     width: 800,
-    height: 600
+    height: 700
   })
 
   windows[options.id] = mainWindow
@@ -143,7 +145,7 @@ const signalManifest = {
 const init = (extensionId, manifest) => {
   const {session} = require('electron')
   process.on('extension-load-error', (error) => {
-    console.log('extension load error', error)
+    console.log('extension load error: ' + error)
   })
   process.on('extension-ready', (installInfo) => {
     console.log('extension ready', installInfo.name)
