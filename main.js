@@ -80,8 +80,8 @@ var applicationMenuTemplate = [
     submenu: [
       { label: 'About Application', selector: 'orderFrontStandardAboutPanel:' },
       { type: 'separator' },
-      { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); }}
-      ]
+      { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit() } }
+    ]
   },
   {
     label: 'Edit',
@@ -95,7 +95,7 @@ var applicationMenuTemplate = [
       { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
     ]
   }
-];
+]
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -140,7 +140,7 @@ app.on('ready', () => {
   })
 
   // Build the application menu based on the template
-  Menu.setApplicationMenu(Menu.buildFromTemplate(applicationMenuTemplate));
+  Menu.setApplicationMenu(Menu.buildFromTemplate(applicationMenuTemplate))
 })
 
 // Quit when all windows are closed.
