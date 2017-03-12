@@ -1,5 +1,6 @@
 const electron = require('electron')
 const path = require('path')
+const Store = require('./store.js')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -16,10 +17,13 @@ const signalExtensionPath = process.env.NODE_ENV === 'production'
   ? path.join(__dirname, '..', '..', 'Signal-Desktop')
   : path.join(__dirname, 'Signal-Desktop')
 
-// use a separate data directory for development
-if (!isProduction) {
-  app.setPath('userData', path.join(app.getPath('appData'), 'signal-muon'))
-}
+// Instantiate the userData store
+const store = new Store({
+  configName: 'user-preferences',
+  defaults: {
+    windowBounds: { width: 800, height: 700 }
+  }
+})
 
 const messages = {
   CALLBACK: 'callback',
@@ -43,12 +47,12 @@ const fileUrl = (str) => {
 }
 
 function createWindow (options) {
-  // Create the browser window.
+  let { width, height } = store.get('windowBounds')
   let mainWindow = new BrowserWindow({
     title: 'Signal Private Messenger',
     icon: path.join(__dirname, 'Signal-Desktop', 'images', 'icon_128.png'),
-    width: 800,
-    height: 700
+    width: width,
+    height: height
   })
 
   windows[options.id] = mainWindow
@@ -58,6 +62,11 @@ function createWindow (options) {
   mainWindow.loadURL(fileUrl(path.join(__dirname, `index.html#${options.url}`)))
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+  mainWindow.on('close', function (event) {
+    // Store current window position to userData
+    store.set('windowBounds', mainWindow.getBounds())
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
