@@ -6,6 +6,8 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain
 const shell = electron.shell
+// Module to create native application menu
+const Menu = electron.Menu
 
 // map ID to window object
 const windows = {}
@@ -71,6 +73,30 @@ function createWindow (options) {
   return mainWindow
 }
 
+// Template for the application menu
+var applicationMenuTemplate = [
+  {
+    label: 'Signal',
+    submenu: [
+      { label: 'About Application', selector: 'orderFrontStandardAboutPanel:' },
+      { type: 'separator' },
+      { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit() } }
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: [
+      { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+      { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+      { type: 'separator' },
+      { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+      { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+      { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
+    ]
+  }
+]
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -112,6 +138,9 @@ app.on('ready', () => {
   ipc.on(messages.OPEN_LINK, (e, url) => {
     shell.openExternal(url)
   })
+
+  // Build the application menu based on the template
+  Menu.setApplicationMenu(Menu.buildFromTemplate(applicationMenuTemplate))
 })
 
 // Quit when all windows are closed.
