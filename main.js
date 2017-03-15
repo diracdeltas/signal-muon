@@ -74,7 +74,7 @@ function createWindow (options) {
 }
 
 // Template for the application menu
-var applicationMenuTemplate = [
+const applicationMenuTemplate = [
   {
     label: 'Signal',
     submenu: [
