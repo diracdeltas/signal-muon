@@ -8,8 +8,7 @@
   "devDependencies": {
     "electron-packager": "brave/electron-packager",
     "electron-prebuilt": "brave/electron-prebuilt",
-    "standard": "^9.0.0",
-    "ncp": "^2.0.0"
+    "standard": "^9.0.0"
   },
   "main": "main.js",
   "standard": {

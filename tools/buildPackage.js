@@ -84,7 +84,7 @@ let extensionsPath = isDarwin
   : path.join(buildDir, 'resources', 'Signal-Desktop')
 
 cmds.push('mkdir -p ' + extensionsPath)
-cmds.push('node_modules/ncp/bin/ncp ./Signal-Desktop ' + extensionsPath)
+cmds.push((isWindows ? 'xcopy /e /i ' : 'cp -R ') + 'Signal-Desktop ' + extensionsPath)
 
 if (isLinux) {
   cmds.push('mv Signal-linux-x64/Signal Signal-linux-x64/signal')
