@@ -16,6 +16,10 @@ const signalExtensionId = 'iopnjipkpnmbpjaalcjcpcbfcnjknmmo'
 const signalExtensionPath = process.env.NODE_ENV === 'production'
   ? path.join(__dirname, '..', '..', 'Signal-Desktop')
   : path.join(__dirname, 'Signal-Desktop')
+// use a separate data directory for development
+if (!isProduction) {
+  app.setPath('userData', path.join(app.getPath('appData'), 'signal-muon'))
+}
 
 // Instantiate the userData store
 const store = new Store({

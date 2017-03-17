@@ -5,9 +5,6 @@ const fs = require('fs')
 class Store {
   constructor (opts) {
     const isProduction = process.env.NODE_ENV !== 'development'
-    if (!isProduction) {
-      app.setPath('userData', path.join(app.getPath('appData'), 'signal-muon'))
-    }
     // Use a different userData file for development
     const configName = isProduction ? opts.configName : opts.configName + '-dev'
     // Renderer process has to get `app` module via `remote`, whereas the main process can get it directly
