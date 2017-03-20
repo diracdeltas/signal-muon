@@ -80,8 +80,8 @@ cmds = cmds.concat([
 ])
 
 let extensionsPath = isDarwin
-  ? path.join(buildDir, 'Signal.app', 'Contents', 'Resources', 'Signal-Desktop')
-  : path.join(buildDir, 'resources', 'Signal-Desktop')
+  ? path.join(buildDir, 'Signal.app', 'Contents', 'Resources')
+  : path.join(buildDir, 'resources')
 
 cmds.push('mkdir -p ' + extensionsPath)
 cmds.push((isWindows ? 'xcopy /e /i ' : 'cp -R ') + 'Signal-Desktop ' + extensionsPath)
