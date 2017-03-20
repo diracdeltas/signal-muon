@@ -53,6 +53,8 @@ function createWindow (options) {
     height: 700
   })
 
+  console.log('creating window', options)
+
   windows[options.id] = mainWindow
   mainWindow.id = options.id
 
