@@ -25,7 +25,7 @@ if (!isProduction) {
 
 // Instantiate the userData store
 const store = new Store({
-  configName: 'user-preferences',
+  configFile: path.join(app.getPath('userData'), 'user-preferences.json'),
   defaults: {
     windowBounds: { width: 800, height: 700 }
   }

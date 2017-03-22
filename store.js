@@ -1,15 +1,8 @@
-const electron = require('electron')
-const path = require('path')
 const fs = require('fs')
 
 class Store {
   constructor (opts) {
-    const isProduction = process.env.NODE_ENV !== 'development'
-    // Use a different userData file for development
-    const configName = isProduction ? opts.configName : opts.configName + '-dev'
-    // Renderer process has to get `app` module via `remote`, whereas the main process can get it directly
-    const userDataPath = (electron.app || electron.remote.app).getPath('userData')
-    this.path = path.join(userDataPath, configName + '.json')
+    this.path = opts.configFile
     this.data = parseDataFile(this.path, opts.defaults)
     console.log('Using userData located at ' + this.path)
   }
