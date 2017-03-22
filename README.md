@@ -1,3 +1,6 @@
+[![Build
+Status](https://travis-ci.org/diracdeltas/signal-muon.svg?branch=master)](https://travis-ci.org/diracdeltas/signal-muon)
+
 # Signal Muon
 
 [Signal Desktop](https://github.com/WhisperSystems/Signal-Desktop) built on top
