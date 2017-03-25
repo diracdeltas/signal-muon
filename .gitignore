@@ -1,5 +1,10 @@
 node_modules
+
+# log files
 npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
 
 # electron-packager output dirs
 *-darwin-x64
@@ -11,3 +16,6 @@ dist-x64
 dist-ia32
 win64-dist
 Signal.tar.bz2
+
+# Mac Specific
+.DS_Store
