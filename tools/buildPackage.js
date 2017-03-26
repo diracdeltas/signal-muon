@@ -2,21 +2,21 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-var execute = require('./execute')
+const execute = require('./execute')
 const path = require('path')
-var fs = require('fs')
+const fs = require('fs')
 
 const isWindows = process.platform === 'win32'
 const isDarwin = process.platform === 'darwin'
-var arch = 'x64'
+let arch = 'x64'
 const isLinux = process.platform === 'linux'
 
-var pack = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
-var electronPrebuiltPack = JSON.parse(fs.readFileSync('./node_modules/electron-prebuilt/package.json', 'utf-8'))
+const pack = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
+const electronPrebuiltPack = JSON.parse(fs.readFileSync('./node_modules/electron-prebuilt/package.json', 'utf-8'))
 const signalVersion = pack.version
 const electronVersion = electronPrebuiltPack.version.replace(/-.*/, '')
 
-var appIcon
+let appIcon
 if (isWindows) {
   appIcon = 'img/icon.ico'
   if (process.env.TARGET_ARCH === 'ia32') {
@@ -30,11 +30,11 @@ if (isWindows) {
 
 const buildDir = 'Signal-' + process.platform + '-' + arch
 
-var env = {
+const env = {
   NODE_ENV: 'production'
 }
 
-var cmds = ['echo cleaning up target...']
+let cmds = ['echo cleaning up target...']
 
 if (isWindows) {
   cmds = cmds.concat([
