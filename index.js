@@ -9,6 +9,6 @@ webview.addEventListener('dom-ready', () => {
   }
 })
 document.body.appendChild(webview)
-require('electron').ipcRenderer.on('window-focused', function() {
+require('electron').ipcRenderer.on('window-focused', function () {
   webview.focus()
 })

@@ -77,7 +77,7 @@ function createWindow (options) {
     store.set('windowBounds', mainWindow.getBounds())
   })
 
-  mainWindow.on('focus', function(event) {
+  mainWindow.on('focus', function () {
     mainWindow.webContents.send(messages.WINDOW_FOCUSED)
   })
 
