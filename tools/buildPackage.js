@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-let execute = require('./execute')
+const execute = require('./execute')
 const path = require('path')
 const fs = require('fs')
 
@@ -11,8 +11,8 @@ const isDarwin = process.platform === 'darwin'
 let arch = 'x64'
 const isLinux = process.platform === 'linux'
 
-let pack = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
-let electronPrebuiltPack = JSON.parse(fs.readFileSync('./node_modules/electron-prebuilt/package.json', 'utf-8'))
+const pack = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
+const electronPrebuiltPack = JSON.parse(fs.readFileSync('./node_modules/electron-prebuilt/package.json', 'utf-8'))
 const signalVersion = pack.version
 const electronVersion = electronPrebuiltPack.version.replace(/-.*/, '')
 
@@ -30,7 +30,7 @@ if (isWindows) {
 
 const buildDir = 'Signal-' + process.platform + '-' + arch
 
-let env = {
+const env = {
   NODE_ENV: 'production'
 }
 

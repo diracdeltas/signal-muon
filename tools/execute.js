@@ -1,4 +1,5 @@
-let exec = require('child_process').exec
+
+const exec = require('child_process').exec
 
 module.exports = function (cmds, env, cb) {
   if (!env) {
@@ -17,7 +18,8 @@ module.exports = function (cmds, env, cb) {
     }
   }
 
-  let r = exec(cmd, {
+
+  const r = exec(cmd, {
     env: process.env
   }, function (err) {
     if (cb) {
