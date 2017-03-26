@@ -1,4 +1,3 @@
-
 const exec = require('child_process').exec
 
 module.exports = function (cmds, env, cb) {
@@ -17,7 +16,6 @@ module.exports = function (cmds, env, cb) {
       process.env[key] = env[key]
     }
   }
-
 
   const r = exec(cmd, {
     env: process.env
