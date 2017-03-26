@@ -12,7 +12,9 @@ with WhisperSystems.
 
 ## Running in development mode
 
-You must have node 7.x and npm installed.
+You must have node 7.x and npm or Yarn installed.
+
+With npm:
 
 ```
 git clone --recursive https://github.com/diracdeltas/signal-muon.git
@@ -21,10 +23,27 @@ npm install
 npm start
 ```
 
+With Yarn:
+
+```
+git clone --recursive https://github.com/diracdeltas/signal-muon.git
+cd signal-muon
+yarn install
+yarn start
+```
+
 ## Building
+
+With npm:
 
 ```
 npm run build
+```
+
+With Yarn:
+
+```
+yarn run build
 ```
 
 ## Caveats
