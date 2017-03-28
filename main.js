@@ -38,7 +38,8 @@ const messages = {
   FOCUS_WINDOW: 'focus-window',
   REMOVE_WINDOW: 'remove-window',
   RESTART: 'restart',
-  OPEN_LINK: 'open-link'
+  OPEN_LINK: 'open-link',
+  WINDOW_FOCUSED: 'window-focused'
 }
 
 const fileUrl = (str) => {
@@ -74,6 +75,10 @@ function createWindow (options) {
   mainWindow.on('close', function (event) {
     // Store current window position to userData
     store.set('windowBounds', mainWindow.getBounds())
+  })
+
+  mainWindow.on('focus', function () {
+    mainWindow.webContents.send(messages.WINDOW_FOCUSED)
   })
 
   // Emitted when the window is closed.
