@@ -10,29 +10,19 @@ Chrome.
 *THIS IS NOT PRODUCTION READY. Use at your own risk.* I am in no way affiliated
 with WhisperSystems.
 
-## Running in development mode
+## Installing
 
-You must have node 7.x and npm or Yarn installed.
+### Prerequisites
 
-With npm:
+You must have git, node 7.x, and either npm or Yarn installed. Then:
 
 ```
 git clone --recursive https://github.com/diracdeltas/signal-muon.git
 cd signal-muon
 npm install
-npm start
 ```
 
-With Yarn:
-
-```
-git clone --recursive https://github.com/diracdeltas/signal-muon.git
-cd signal-muon
-yarn install
-yarn start
-```
-
-## Building
+### Building
 
 With npm:
 
@@ -45,6 +35,14 @@ With Yarn:
 ```
 yarn run build
 ```
+
+Then open the app in the build directory logged in the console. Ex: `open
+Signal-darwin-x64/Signal.app/` on MacOS.
+
+## Running in development mode
+
+To run in development mode with the Signal staging server (no need to pair
+with a mobile device), do `npm/yarn start` instead of `npm/yarn run build`.
 
 ## Caveats
 
