@@ -4,7 +4,7 @@
   "repository": "https://github.com/diracdeltas/Signal-Muon",
   "description": "Signal Desktop built on top of https://github.com/brave/muon",
   "license": "MPL-2.0",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "devDependencies": {
     "electron-packager": "brave/electron-packager",
     "electron-prebuilt": "brave/electron-prebuilt",
