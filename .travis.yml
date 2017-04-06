@@ -2,8 +2,6 @@ sudo: false
 language: node_js
 node_js:
   - "node"
-cache:
-  directories:
-    - node_modules # NPM packages
+cache: yarn
 script:
   - npm run lint
