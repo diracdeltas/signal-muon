@@ -14,7 +14,6 @@ const Menu = electron.Menu
 const windows = {}
 
 const isProduction = process.env.NODE_ENV !== 'development'
-const signalExtensionId = 'iopnjipkpnmbpjaalcjcpcbfcnjknmmo'
 const signalExtensionPath = process.env.NODE_ENV === 'production'
   ? path.join(__dirname, '..', '..', 'Signal-Desktop')
   : path.join(__dirname, 'Signal-Desktop')
@@ -206,9 +205,8 @@ const signalManifest = {
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxvZ70fWZ/yqYMuoRMRIRLR0zwiEGJrDuQwI03TiqUllg6/EBj+YOyldoPQeEOua//0i6NzSX6OwoZv2ynfGJSQwq550OphRXU8YGeWqPGhU7JeoH/6ZqHJefBXIHIAqipuBuVCsm9ONfrj1L1CmWt/VOIUqlk6i4g3Xe2WnPRk5z7su9VR0UYIahX8av4qJtAwGoUkvbdTZAD6vHIu18wgA0jO5g41KGXb/uco3o8HpJ9YPQsH04TXadXwOA9sn6LNBl0t12GlRVViQJZe3x3hS/uYQFdPfqN+abrqnSOwA2mDZbxkLBwPt6ayql5cM1OjGt+Wj3bMBtTHQ+oavBBwIDAQAB'
 }
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-const init = (extensionId, manifest) => {
+// Starts the signal desktop process
+const init = () => {
   const {session} = require('electron')
   process.on('extension-load-error', (error) => {
     console.log('extension load error: ' + error)
@@ -216,9 +214,5 @@ const init = (extensionId, manifest) => {
   process.on('extension-ready', (installInfo) => {
     console.log('extension ready', installInfo.name)
   })
-
-  let loadExtension = (extensionId, extensionPath, manifest, manifestLocation = 'unpacked') => {
-    session.defaultSession.extensions.load(extensionPath, manifest, manifestLocation)
-  }
-  loadExtension(signalExtensionId, signalExtensionPath, signalManifest)
+  session.defaultSession.extensions.load(signalExtensionPath, signalManifest, 'unpacked')
 }
