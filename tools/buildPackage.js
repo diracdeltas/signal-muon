@@ -97,7 +97,6 @@ execute(cmds, env, (err) => {
   if (err) {
     console.error('buildPackage failed', err)
     process.exit(1)
-    return
   }
   console.log('done')
 })
