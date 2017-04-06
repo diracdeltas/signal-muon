@@ -172,6 +172,12 @@ app.on('window-all-closed', function () {
   }
 })
 
+app.on('activate', function (event, hasVisibleWindows) {
+  if (!hasVisibleWindows) {
+    init()
+  }
+})
+
 const signalManifest = {
   name: 'Signal Private Messenger',
   short_name: 'Signal',
