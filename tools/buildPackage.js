@@ -12,9 +12,8 @@ let arch = 'x64'
 const isLinux = process.platform === 'linux'
 
 const pack = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
-const electronPrebuiltPack = JSON.parse(fs.readFileSync('./node_modules/electron-prebuilt/package.json', 'utf-8'))
 const signalVersion = pack.version
-const electronVersion = electronPrebuiltPack.version.replace(/-.*/, '')
+const electronVersion = process.env.npm_config_brave_electron_version.replace(/-.*/, '')
 
 let appIcon
 if (isWindows) {

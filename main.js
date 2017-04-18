@@ -49,7 +49,7 @@ const fileUrl = (str) => {
     pathName = '/' + pathName
   }
 
-  return encodeURI('file://' + pathName)
+  return encodeURI('chrome://brave' + pathName)
 }
 
 function createWindow (options) {
@@ -69,7 +69,9 @@ function createWindow (options) {
   // and load the index.html of the app.
   mainWindow.loadURL(fileUrl(path.join(__dirname, `index.html#${options.url}`)))
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  if (!isProduction) {
+    mainWindow.webContents.openDevTools()
+  }
 
   mainWindow.on('close', function (event) {
     // Store current window position to userData
