@@ -9,10 +9,3 @@ webview.addEventListener('dom-ready', () => {
 })
 
 document.body.appendChild(webview)
-
-// TODO: re-implement webview autofocus
-/*
-require('electron').ipcRenderer.on('window-focused', function () {
-  webview.focus()
-})
-*/
