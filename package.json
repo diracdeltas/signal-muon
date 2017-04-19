@@ -19,6 +19,7 @@
   "scripts": {
     "start": "node ./tools/start.js --debug=5859 --enable-logging --v=0 --enable-extension-activity-logging --enable-sandbox-logging --enable-dcheck",
     "build": "node ./tools/buildPackage.js",
+    "muon-update": "rm -r node_modules/electron-prebuilt && rm -rf ~/.electron && npm install",
     "lint": "standard"
   }
 }

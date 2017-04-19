@@ -39,6 +39,25 @@ yarn run build
 Then open the app in the build directory logged in the console. Ex: `open
 Signal-darwin-x64/Signal.app/` on MacOS.
 
+### Updating
+
+First fetch changes:
+
+```
+git pull origin master
+git submodule update --recursive
+```
+
+If you are updating by a [MAJOR or MINOR](http://semver.org/) version number (ex:
+0.0.3 to 0.1.0, or 0.1.0 to 1.0.0), run the following step to get an updated version of chromium. If you are
+updating by a PATCH version (ex: 0.0.2 to 0.0.3), skip the following step.
+
+```
+npm run muon-update
+```
+
+Then re-build the package.
+
 ## Running in development mode
 
 To run in development mode with the Signal staging server (no need to pair
