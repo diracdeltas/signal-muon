@@ -82,7 +82,12 @@ let extensionsPath = isDarwin
   ? path.join(buildDir, 'Signal.app', 'Contents', 'Resources')
   : path.join(buildDir, 'resources')
 
-cmds.push('mkdir -p ' + extensionsPath)
+if(isWindows) {
+	cmds.push('(if not exist ' + extensionsPath + ' mkdir ' + extensionsPath + ')')
+} else {
+	cmds.push('mkdir -p ' + extensionsPath)
+}
+
 cmds.push((isWindows ? 'xcopy /e /i ' : 'cp -R ') + 'Signal-Desktop ' + extensionsPath)
 
 if (isLinux) {
