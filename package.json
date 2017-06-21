@@ -6,7 +6,7 @@
   "license": "MPL-2.0",
   "version": "0.3.0",
   "devDependencies": {
-    "electron-packager": "github:brave/electron-packager",
+    "electron-packager": "brave/electron-packager",
     "electron-prebuilt": "brave/electron-prebuilt",
     "standard": "^9.0.0"
   },
