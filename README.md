@@ -3,6 +3,8 @@ Status](https://travis-ci.org/diracdeltas/signal-muon.svg?branch=master)](https:
 
 # Signal Muon
 
+**UPDATE (10/31/17): This project is no longer actively maintained since https://signal.org/blog/standalone-signal-desktop/ is out now.**
+
 [Signal Desktop](https://github.com/WhisperSystems/Signal-Desktop) built on top
 of [Muon](https://github.com/Brave/muon) so you can run it without Google
 Chrome.
